@@ -1,4 +1,4 @@
-defmodule TdCluster.Handler do
+defmodule TdCluster.ClusterHandler do
 
 alias TdCluster.ProcessGroup
 
