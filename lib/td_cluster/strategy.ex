@@ -1,4 +1,7 @@
 defmodule TdCluster.Strategy do
+  @moduledoc """
+  Strategy to handle microservices elixir cluster
+  """
 
   use GenServer
   use Cluster.Strategy
@@ -38,13 +41,15 @@ defmodule TdCluster.Strategy do
   defp load(%State{topology: topology, meta: meta} = state) do
     nodes = MapSet.new(get_nodes(state))
     connected_nodes = MapSet.new(Node.list())
+
     new_nodes_connected =
       case MapSet.to_list(MapSet.difference(nodes, connected_nodes)) do
         [] ->
           meta
+
         nodes_to_connect ->
           connect_nodes(topology, state, nodes_to_connect)
-    end
+      end
 
     %State{state | meta: new_nodes_connected}
   end
@@ -58,6 +63,7 @@ defmodule TdCluster.Strategy do
       {:error, nodes_no_connected} ->
         Process.send_after(self(), :load, get_polling_interval(state))
         nodes = MapSet.new(nodes)
+
         Enum.reduce(nodes_no_connected, nodes, fn {n, _}, acc ->
           MapSet.delete(acc, n)
         end)
@@ -72,15 +78,15 @@ defmodule TdCluster.Strategy do
 
   defp apply_template(template, service) do
     {:ok, hostname} = :inet.gethostname()
+
     map = %{
       "service" => Atom.to_string(service),
-      "hostname" => hostname,
+      "hostname" => hostname
     }
 
     ~r/{{([a-z]+)?}}/
     |> Regex.replace(template, fn _, match -> map[match] end)
     |> String.to_atom()
-
   end
 
   defp get_polling_interval(%State{config: config}) do
@@ -94,5 +100,4 @@ defmodule TdCluster.Strategy do
   defp get_services(%State{config: config}) do
     Keyword.fetch!(config, :services)
   end
-
 end

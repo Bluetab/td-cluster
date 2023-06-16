@@ -1,4 +1,8 @@
 defmodule TdCluster.ProcessGroup do
+  @moduledoc """
+  Supervisor for :pg module. Start and supervise process group
+  """
+
   use Supervisor
 
   @scope Application.compile_env(:td_cluster, :scope, :truedat)
@@ -19,5 +23,5 @@ defmodule TdCluster.ProcessGroup do
     Supervisor.init(children, strategy: :one_for_one)
   end
 
-  def get_scope(), do: @scope
- end
+  def get_scope, do: @scope
+end

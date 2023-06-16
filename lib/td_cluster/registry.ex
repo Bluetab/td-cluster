@@ -1,4 +1,7 @@
 defmodule TdCluster.Registry do
+  @moduledoc """
+  Implement function to registre us node in groups passed by config
+  """
 
   alias TdCluster.ProcessGroup
 
