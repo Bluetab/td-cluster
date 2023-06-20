@@ -28,6 +28,7 @@ defmodule TdCluster.Strategy do
 
   @impl true
   def handle_info(:load, state) do
+    IO.puts "############################################################### LOAD"
     {:noreply, load(state)}
   end
 
@@ -67,6 +68,7 @@ defmodule TdCluster.Strategy do
   end
 
   defp connect_nodes(topology, state, nodes) do
+    IO.puts "############################################################### CONNECT NODES"
     IO.inspect nodes, label: "Connect nodes Nodes ---->"
     IO.inspect state, label: "Connect nodes State ---->"
     case Cluster.Strategy.connect_nodes(topology, state.connect, state.list_nodes, nodes) do
@@ -75,6 +77,7 @@ defmodule TdCluster.Strategy do
         MapSet.new(nodes)
 
       {:error, nodes_no_connected} ->
+        "############################################################### CONNECT NODES ERROR"
         Process.send_after(self(), :load, get_polling_interval(state))
         nodes = MapSet.new(nodes)
 
