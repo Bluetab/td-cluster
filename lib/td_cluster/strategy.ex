@@ -20,6 +20,7 @@ defmodule TdCluster.Strategy do
   end
 
   def init([%State{config: config} = state]) do
+    IO.puts "############################################################### INIT"
     groups = Keyword.fetch!(config, :groups)
     Registry.registre(groups)
     {:ok, load(state), 0}
@@ -66,6 +67,8 @@ defmodule TdCluster.Strategy do
   end
 
   defp connect_nodes(topology, state, nodes) do
+    IO.inspect nodes, label: "Connect nodes Nodes ---->"
+    IO.inspect state, label: "Connect nodes State ---->"
     case Cluster.Strategy.connect_nodes(topology, state.connect, state.list_nodes, nodes) do
       :ok ->
         Enum.each(nodes, &Node.monitor(&1, true))
