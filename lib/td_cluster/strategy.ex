@@ -77,7 +77,7 @@ defmodule TdCluster.Strategy do
         MapSet.new(nodes)
 
       {:error, nodes_no_connected} ->
-        "############################################################### CONNECT NODES ERROR"
+        IO.puts "############################################################### CONNECT NODES ERROR"
         Process.send_after(self(), :load, get_polling_interval(state))
         nodes = MapSet.new(nodes)
 
