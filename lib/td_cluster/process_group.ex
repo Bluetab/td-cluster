@@ -5,7 +5,7 @@ defmodule TdCluster.ProcessGroup do
 
   use Supervisor
 
-  @scope Application.compile_env(:td_cluster, :scope, :truedat)
+  @default_scope :truedat
 
   def start_link(args) do
     Supervisor.start_link(__MODULE__, args, name: __MODULE__)
@@ -16,12 +16,12 @@ defmodule TdCluster.ProcessGroup do
     children = [
       %{
         id: :pg,
-        start: {:pg, :start_link, [@scope]}
+        start: {:pg, :start_link, [get_scope()]}
       }
     ]
 
     Supervisor.init(children, strategy: :one_for_one)
   end
 
-  def get_scope, do: @scope
+  def get_scope, do: Application.get_env(:td_cluster, :scope, @default_scope)
 end
