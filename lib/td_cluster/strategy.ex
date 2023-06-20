@@ -30,8 +30,17 @@ defmodule TdCluster.Strategy do
     {:noreply, load(state)}
   end
 
-  def handle_info({:nodedown, _node}, state) do
-    {:noreply, load(state)}
+  def handle_info({:nodedown, node}, %State{meta: meta} = state) do
+    Node.monitor(node, false)
+
+    new_node_list =
+      [node]
+      |> MapSet.new()
+      |> then(&MapSet.difference(meta, &1))
+
+    new_state = %State{state | meta: new_node_list}
+
+    {:noreply, load(new_state)}
   end
 
   def handle_info(_action, state) do
@@ -41,6 +50,8 @@ defmodule TdCluster.Strategy do
   defp load(%State{topology: topology, meta: meta} = state) do
     nodes = MapSet.new(get_nodes(state))
     connected_nodes = MapSet.new(Node.list())
+
+    monitor_indirect_connected_nodes(connected_nodes, meta)
 
     new_nodes_connected =
       case MapSet.to_list(MapSet.difference(nodes, connected_nodes)) do
@@ -99,5 +110,12 @@ defmodule TdCluster.Strategy do
 
   defp get_services(%State{config: config}) do
     Keyword.fetch!(config, :services)
+  end
+
+  defp monitor_indirect_connected_nodes(nodes_connected, nodes_monitored) do
+    nodes_connected
+    |> MapSet.difference(nodes_monitored)
+    |> MapSet.to_list()
+    |> Enum.each(&Node.monitor(&1, true))
   end
 end
