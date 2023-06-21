@@ -33,6 +33,7 @@ defmodule TdCluster.Strategy do
   end
 
   def handle_info({:nodedown, node}, %State{meta: meta} = state) do
+    IO.inspect node, label: "&&&&&&&&&&&&&&&&&&&&&&&&&& NODE DOWN &&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&"
     Node.monitor(node, false)
 
     new_node_list =
@@ -45,13 +46,17 @@ defmodule TdCluster.Strategy do
     {:noreply, load(new_state)}
   end
 
-  def handle_info(_action, state) do
+  def handle_info(action, state) do
+    IO.inspect action, label: "&&&&&&&&&&&&&&&&&&&&&&&&&& NODE DOWN &&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&"
     {:noreply, state}
   end
 
   defp load(%State{topology: topology, meta: meta} = state) do
     nodes = MapSet.new(get_nodes(state))
     connected_nodes = MapSet.new(Node.list())
+
+    IO.inspect nodes, label: "################################################# NODES CONFIGURED -> "
+    IO.inspect connected_nodes, label: "################################################# NODE LIST -> "
 
     monitor_indirect_connected_nodes(connected_nodes, meta)
 
@@ -61,6 +66,7 @@ defmodule TdCluster.Strategy do
           meta
 
         nodes_to_connect ->
+          IO.inspect nodes, label: "################################################# NODES TO CONNECT -> "
           connect_nodes(topology, state, nodes_to_connect)
       end
 
@@ -122,6 +128,7 @@ defmodule TdCluster.Strategy do
     nodes_connected
     |> MapSet.difference(nodes_monitored)
     |> MapSet.to_list()
+    |> IO.inspect(label: "########################################### INDIRECT NODES MONITOR ->")
     |> Enum.each(&Node.monitor(&1, true))
   end
 end
