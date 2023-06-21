@@ -40,7 +40,9 @@ defmodule TdCluster.Strategy do
 
     new_state = %State{state | meta: new_node_list}
 
-    {:noreply, load(new_state)}
+    Process.send_after(self(), :load, get_polling_interval(state))
+
+    {:noreply, new_state}
   end
 
   def handle_info(_action, state) do
@@ -53,16 +55,15 @@ defmodule TdCluster.Strategy do
 
     monitor_indirect_connected_nodes(connected_nodes, meta)
 
-    new_nodes_connected =
-      case MapSet.to_list(MapSet.difference(nodes, connected_nodes)) do
-        [] ->
-          meta
+    case MapSet.to_list(MapSet.difference(nodes, connected_nodes)) do
+      [] ->
+        meta
 
-        nodes_to_connect ->
-          connect_nodes(topology, state, nodes_to_connect)
-      end
+      nodes_to_connect ->
+        connect_nodes(topology, state, nodes_to_connect)
+    end
 
-    %State{state | meta: new_nodes_connected}
+    %State{state | meta: MapSet.new(Node.list())}
   end
 
   defp connect_nodes(topology, state, nodes) do
