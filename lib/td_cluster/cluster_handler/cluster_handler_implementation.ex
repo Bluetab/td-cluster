@@ -9,12 +9,12 @@ defmodule TdCluster.ClusterHandlerImplementation do
 
   @impl true
   def call(service, module, func, args \\ []) do
-    pid = get_node(service)
-
-    case :rpc.call(pid, module, func, args) do
+    service
+    |> get_node()
+    |> :rpc.call(module, func, args)
+    |> case do
       {:badrpc, error} ->
         {:error, error}
-
       response ->
         {:ok, response}
     end
@@ -36,10 +36,9 @@ defmodule TdCluster.ClusterHandlerImplementation do
 
   defp get_node(service) do
     scope = ProcessGroup.get_scope()
-
-    scope
-    |> :pg.get_members(service)
-    |> hd
-    |> node
+    case :pg.get_members(scope, service) do
+      [] -> nil
+      [pid | _] -> node(pid)
+    end
   end
 end
