@@ -25,10 +25,16 @@ defmodule TdCluster.ClusterHandlerImplementation do
     service
     |> get_node()
     |> :rpc.call(module, func, args)
+    |> case do
+      {:badrpc, error} ->
+        raise TdCluster.ClusterError, service: service, error: error
+      response ->
+        {:ok, response}
+    end
   end
 
   @impl true
-  def async_call!(service, module, func, args \\ []) do
+  def async_call(service, module, func, args \\ []) do
     service
     |> get_node()
     |> :rpc.async_call(module, func, args)
