@@ -15,6 +15,7 @@ defmodule TdCluster.ClusterHandlerImplementation do
     |> case do
       {:badrpc, error} ->
         {:error, error}
+
       response ->
         {:ok, response}
     end
@@ -28,6 +29,7 @@ defmodule TdCluster.ClusterHandlerImplementation do
     |> case do
       {:badrpc, error} ->
         raise TdCluster.ClusterError, service: service, error: error
+
       response ->
         {:ok, response}
     end
@@ -42,6 +44,7 @@ defmodule TdCluster.ClusterHandlerImplementation do
 
   defp get_node(service) do
     scope = ProcessGroup.get_scope()
+
     case :pg.get_members(scope, service) do
       [] -> nil
       [pid | _] -> node(pid)
