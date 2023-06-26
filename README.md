@@ -6,7 +6,7 @@ microservices approach
 
 ### Files
 
-**config/config.exs**
+**config/runtime.exs**
 ```elixir
 
 config :td_cluster,
@@ -49,6 +49,19 @@ children = [
   # ...
   TdCluster.Supervisor,
 ]
+```
+
+**env.sh.eex**
+```shell
+#!/bin/sh
+
+# RELEASE_NODE MUST BE DEFINED IN EXECUTION ENVIRONMENT
+
+if [ -n "$RELEASE_NODE" ]; then
+  DEFAULT_NAME=<%= @release.name %>
+  export RELEASE_DISTRIBUTION=name
+fi
+...
 ```
 
 ### Environment Variables
