@@ -1,0 +1,22 @@
+defmodule TdCluster.Supervisor do
+  @moduledoc """
+  Supervisor for :pg (Process Group) and libcluster supervisor
+  """
+  use Supervisor
+
+  def start_link(opts \\ []) do
+    Supervisor.start_link(__MODULE__, opts, name: __MODULE__)
+  end
+
+  @impl true
+  def init(_args) do
+    topologies = Application.get_env(:td_cluster, :topologies)
+
+    children = [
+      TdCluster.ProcessGroup,
+      {Cluster.Supervisor, [topologies, [name: TdCluster.ClusterSupervisor]]}
+    ]
+
+    Supervisor.init(children, strategy: :one_for_one)
+  end
+end
