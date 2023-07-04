@@ -27,3 +27,5 @@ td_cluster-*.tar
 
 # IDES
 .vscode
+
+.tool-versions

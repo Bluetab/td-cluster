@@ -31,7 +31,7 @@ defmodule TdCluster.ClusterHandlerImplementation do
         raise TdCluster.ClusterError, service: service, error: error
 
       response ->
-        {:ok, response}
+        response
     end
   end
 

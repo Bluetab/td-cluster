@@ -21,8 +21,8 @@ defmodule TdCluster.Strategy do
 
   def init([%State{config: config} = state]) do
     groups = Keyword.fetch!(config, :groups)
-    Registry.registre(groups)
-    {:ok, load(state), 0}
+    Registry.register(groups)
+    {:ok, load(state)}
   end
 
   @impl true
@@ -43,10 +43,6 @@ defmodule TdCluster.Strategy do
     Process.send_after(self(), :load, get_polling_interval(state))
 
     {:noreply, new_state}
-  end
-
-  def handle_info(_action, state) do
-    {:noreply, state}
   end
 
   defp load(%State{topology: topology, meta: meta} = state) do
