@@ -16,7 +16,7 @@ defmodule TdCluster.Application do
   end
 
   defp children(:test), do: []
-  defp children(_), do
+  defp children(_) do
     current_topology = fetch_current_topology()
     topologies =  fetch_topologies()
     |> Keyword.filter(fn {key, _} -> key == String.to_atom(current_topology) end)
