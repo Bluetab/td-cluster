@@ -4,7 +4,7 @@ defmodule TdCluster.MixProject do
   def project do
     [
       app: :td_cluster,
-      version: "0.1.0",
+      version: "5.10.1",
       elixir: "~> 1.14",
       start_permanent: Mix.env() == :prod,
       deps: deps()
@@ -14,6 +14,7 @@ defmodule TdCluster.MixProject do
   # Run "mix help compile.app" to learn about applications.
   def application do
     [
+      mod: {TdCluster.Application, []},
       extra_applications: [:logger]
     ]
   end

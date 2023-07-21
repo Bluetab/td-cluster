@@ -8,7 +8,15 @@ defmodule TdCluster.ProcessGroup do
   @default_scope :truedat
 
   def start_link(args) do
-    Supervisor.start_link(__MODULE__, args, name: __MODULE__)
+    link = Supervisor.start_link(__MODULE__, args, name: __MODULE__)
+
+    :td_cluster
+    |> Application.get_env(:groups)
+    |> Enum.each(fn group ->
+      :pg.join(@default_scope, group, self())
+    end)
+
+    link
   end
 
   @impl true
@@ -16,12 +24,12 @@ defmodule TdCluster.ProcessGroup do
     children = [
       %{
         id: :pg,
-        start: {:pg, :start_link, [get_scope()]}
+        start: {:pg, :start_link, [@default_scope]}
       }
     ]
 
     Supervisor.init(children, strategy: :one_for_one)
   end
 
-  def get_scope, do: Application.get_env(:td_cluster, :scope, @default_scope)
+  def get_scope, do: @default_scope
 end
