@@ -5,19 +5,26 @@ defmodule TdCluster.Application do
 
   @impl true
   def start(_type, _args) do
+    # See https://hexdocs.pm/elixir/Supervisor.html
+    # for other strategies and supported options
+    opts = [strategy: :one_for_one, name: TdCluster.Supervisor]
+
+    :td_cluster
+    |> Application.get_env(:env)
+    |> children()
+    |> Supervisor.start_link(opts)
+  end
+
+  defp children(:test), do: []
+  defp children(_) do
     current_topology = fetch_current_topology()
     topologies =  fetch_topologies()
     |> Keyword.filter(fn {key, _} -> key == String.to_atom(current_topology) end)
 
-    children = [
+    [
       TdCluster.ProcessGroup,
       {Cluster.Supervisor, [topologies, [name: TdCluster.ClusterSupervisor]]}
     ]
-
-    # See https://hexdocs.pm/elixir/Supervisor.html
-    # for other strategies and supported options
-    opts = [strategy: :one_for_one, name: TdCluster.Supervisor]
-    Supervisor.start_link(children, opts)
   end
 
   defp fetch_current_topology, do: System.get_env("CLUSTER_TOPOLOGY", "local_epdm")
