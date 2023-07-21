@@ -1,5 +1,11 @@
 # Changelog
 
+## [5.10.2] 2023-07-21
+
+### Changed
+
+- [TD-5809] Do not start application on test
+
 ## [5.10.1] 2023-07-21
 
 ### Changed
