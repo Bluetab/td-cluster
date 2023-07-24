@@ -1,10 +1,10 @@
 # Changelog
 
-## [5.10.2] 2023-07-21
+## [5.11.0] 2023-07-24
 
 ### Changed
 
-- [TD-5809] Do not start application on test
+- [TD-5809] Do not start application on test nor when running without Node name
 
 ## [5.10.1] 2023-07-21
 
