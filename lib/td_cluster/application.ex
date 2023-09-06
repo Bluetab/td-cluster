@@ -15,7 +15,17 @@ defmodule TdCluster.Application do
     |> Supervisor.start_link(opts)
   end
 
-  defp children(:test, _), do: []
+  defp children(:test, _) do
+    topologies =
+      fetch_topologies()
+      |> Keyword.filter(fn {key, _} -> key == String.to_atom("test") end)
+
+    [
+      TdCluster.ProcessGroup,
+      {Cluster.Supervisor, [topologies, [name: TdCluster.ClusterSupervisor]]}
+    ]
+  end
+
   defp children(_, :nonode@nohost), do: []
 
   defp children(_, _) do
@@ -46,6 +56,7 @@ defmodule TdCluster.Application do
           polling_interval: 10_000
         ]
       ],
-      docker: [strategy: Elixir.Cluster.Strategy.Gossip]
+      docker: [strategy: Elixir.Cluster.Strategy.Gossip],
+      test: [strategy: Elixir.Cluster.Strategy.Epmd]
     ]
 end
