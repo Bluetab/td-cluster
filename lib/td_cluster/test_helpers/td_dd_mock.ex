@@ -1,4 +1,8 @@
 defmodule TdCluster.TestHelpers.TdDdMock do
+  @moduledoc """
+  Mocks Clusters for tests
+  """
+
   def get_reference_dataset(expect, id, expected) do
     expect.(MockClusterHandler, :call, 1, fn :dd, TdDd.ReferenceData, :get, [arg]
                                              when arg == id ->

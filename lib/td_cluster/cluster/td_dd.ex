@@ -1,4 +1,8 @@
 defmodule TdCluster.Cluster.TdDd do
+  @moduledoc """
+  Cluster handler for TdDd
+  """
+
   alias TdCluster.ClusterHandler
 
   def get_reference_dataset(id) do
