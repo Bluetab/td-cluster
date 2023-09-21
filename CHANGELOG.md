@@ -1,6 +1,6 @@
 # Changelog
 
-## [Unreleased]
+## [5.15.0] 2023-09-21
 
  - [TD-5947] New cluster topology for test and TdDd contract
 
