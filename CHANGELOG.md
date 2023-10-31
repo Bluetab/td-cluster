@@ -1,6 +1,14 @@
 # Changelog
 
+## [Unreleased]
+
+### Added
+
+- [TD-6059] TdDf Contract and support for reindex Tasks
+
 ## [5.15.1] 2023-09-21
+
+### Added
 
 - [TD-6071] TdBg contract
 
