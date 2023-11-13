@@ -14,7 +14,7 @@ defmodule TdCluster.TestHelpers.TdDdMock do
     expect.(MockClusterHandler, :call, 1, fn :dd,
                                              TdDd.DataStructures,
                                              :get_latest_version,
-                                             [arg, [:data_fields]]
+                                             [arg, _]
                                              when arg == id ->
       expected
     end)
