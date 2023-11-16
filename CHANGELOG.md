@@ -1,5 +1,13 @@
 # Changelog
 
+## [Unreleased]
+
+### Added
+
+- [TD-6140]
+  - TdAi contract for chat_completion
+  - Refactored ClusterHandler behaviour to have a single file
+
 ## [5.17.0] 2023-10-31
 
 ### Added

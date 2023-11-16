@@ -1,6 +1,6 @@
-defmodule TdCluster.ClusterHandlerBehaviour do
+defmodule TdCluster.ClusterHandler do
   @moduledoc """
-  Behaviour for interacting with the Truedat Cluster
+  Module for interacting with the Truedat Cluster
   """
 
   @typedoc """
@@ -28,14 +28,12 @@ defmodule TdCluster.ClusterHandlerBehaviour do
   @callback call!(service, module :: call_module, func, args) :: call_response
   @callback async_call(service, module :: call_module, func, args) :: async_call_response
 
-  defmacro __using__(_opts) do
-    module_to_import =
-      Application.get_env(:td_cluster, :cluster_handler, TdCluster.ClusterHandlerImplementation)
+  def call(service, module, func, args \\ []), do: impl().call(service, module, func, args)
+  def call!(service, module, func, args \\ []), do: impl().call!(service, module, func, args)
 
-    quote do
-      defdelegate call(service, module, func, args), to: unquote(module_to_import)
-      defdelegate call!(service, module, func, args), to: unquote(module_to_import)
-      defdelegate async_call(service, module, func, args), to: unquote(module_to_import)
-    end
-  end
+  def async_call(service, module, func, args \\ []),
+    do: impl().async_call(service, module, func, args)
+
+  defp impl(),
+    do: Application.get_env(:td_cluster, TdCluster.ClusterHandler, TdCluster.ClusterHandlerImpl)
 end
