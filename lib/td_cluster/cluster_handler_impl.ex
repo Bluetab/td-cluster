@@ -1,11 +1,11 @@
-defmodule TdCluster.ClusterHandlerImplementation do
+defmodule TdCluster.ClusterHandlerImpl do
   @moduledoc """
-  Cluster Handler API implementation according TdCluster.ClusterHandlerBehaviour behaviour
+  ClusterHandler implementation
   """
 
   alias TdCluster.ProcessGroup
 
-  @behaviour TdCluster.ClusterHandlerBehaviour
+  @behaviour TdCluster.ClusterHandler
 
   @impl true
   def call(service, module, func, args \\ []) do
