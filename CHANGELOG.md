@@ -6,7 +6,7 @@
 
 - [TD-6140]
   - TdAi contract for chat_completion
-  - Refactored ClusterHandler behaviour to have a single file
+  - Refactored ClusterHandler behaviour to have a single filegi
 
 ## [5.17.0] 2023-10-31
 
