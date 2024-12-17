@@ -34,6 +34,6 @@ defmodule TdCluster.ClusterHandler do
   def async_call(service, module, func, args \\ []),
     do: impl().async_call(service, module, func, args)
 
-  defp impl(),
+  defp impl,
     do: Application.get_env(:td_cluster, TdCluster.ClusterHandler, TdCluster.ClusterHandlerImpl)
 end
