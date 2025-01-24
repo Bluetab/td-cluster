@@ -1,5 +1,11 @@
 # Changelog
 
+## [Unreleased]
+
+### Changed
+
+- [TD-6862] Update funcion list_by_scope!
+
 ## [5.19.0] 2023-11-16
 
 ### Added
