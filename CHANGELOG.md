@@ -1,5 +1,11 @@
 # Changelog
 
+## [7.1.0] 2025-01-27
+
+### Changed
+
+- [TD-6862] Update function list_by_scope!
+
 ## [7.0.0] 2025-01-07
 
 ### Changed
