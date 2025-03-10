@@ -1,5 +1,11 @@
 # Changelog
 
+# [7.3.0] 2025-03-10
+
+### Added
+
+- [TD-6927] Add task log mocks
+
 ## [7.1.0] 2025-01-27
 
 ### Changed
