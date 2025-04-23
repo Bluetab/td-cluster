@@ -8,4 +8,13 @@ defmodule TdCluster.TestHelpers.TdAiMock.Embeddings do
       expected
     end)
   end
+
+  def generate_vector(expect, text, collection_name, expected, times \\ 1) do
+    expect.(MockClusterHandler, :call, times, fn :ai,
+                                                 TdAi.Embeddings,
+                                                 :generate_vector,
+                                                 [^text, ^collection_name] ->
+      expected
+    end)
+  end
 end
