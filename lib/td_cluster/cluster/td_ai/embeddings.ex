@@ -1,6 +1,6 @@
 defmodule TdCluster.Cluster.TdAi.Embeddings do
   @moduledoc """
-  Module to interact with tdai indices
+  Module to interact with td ai embeddings
   """
 
   alias TdCluster.Cluster

@@ -1,6 +1,6 @@
 defmodule TdCluster.Cluster.TdAi.Indices do
   @moduledoc """
-  Module to interact with tdai indices
+  Module to interact with td ai indices
   """
 
   alias TdCluster.Cluster
