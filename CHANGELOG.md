@@ -1,5 +1,13 @@
 # Changelog
 
+## [Unreleased]
+
+### Added
+
+- [TD-6219]
+  - Ai functions to fetch indices' configs and embeddings
+  - Bg function to get business concept versions embeddings
+
 ## [7.4.0] 2025-04-09
 
 ### Changed
