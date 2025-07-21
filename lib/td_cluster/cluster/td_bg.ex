@@ -18,35 +18,33 @@ defmodule TdCluster.Cluster.TdBg do
     call_bg(TdBg.BusinessConcepts, :generate_vector, [params, collection_name])
   end
 
-  def start_bulk_load_event(params, user_id, file_hash, filename, task_ref) do
+  def get_business_concept_by_translatable_name(name) do
+    call_bg(TdBg.BusinessConcepts, :get_business_concept_by_translatable_name, [name])
+  end
+
+  def bulk_load_event(
+        bulk_data,
+        filename,
+        file_hash,
+        task_ref,
+        user_id,
+        event_status
+      ) do
     event =
       %{
-        user_id: user_id,
-        status: "STARTED",
+        response: bulk_data,
+        filename: filename,
         file_hash: file_hash,
         task_reference: ref_to_string(task_ref),
-        filename: filename
-      }
-
-    create_bulk_upload_event(params, event)
-  end
-
-  def completed_bulk_load_event(params, user_id, file_hash, filename, task_ref) do
-    event =
-      %{
-        response: params,
         user_id: user_id,
-        file_hash: file_hash,
-        filename: filename,
-        status: "COMPLETED",
-        task_reference: ref_to_string(task_ref)
+        status: event_status
       }
 
-    create_bulk_upload_event(params, event)
+    create_bulk_upload_event(event)
   end
 
-  defp create_bulk_upload_event(params, event) do
-    call_bg(TdBg.BusinessConcepts.BulkUploadEvent, :create_bulk_upload_event, [params, event])
+  defp create_bulk_upload_event(event) do
+    call_bg(TdBg.BusinessConcepts.BulkUploadEvents, :create_bulk_upload_event, [event])
   end
 
   def ref_to_string(ref) when is_reference(ref) do

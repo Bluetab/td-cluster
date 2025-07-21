@@ -14,13 +14,13 @@ defmodule TdCluster.Cluster.TdDd do
   end
 
   # bulk relation data_structure
-  def get_data_structure_by_external_id(id, opts \\ []) do
-    call_dd(TdDd.DataStructures, :get_data_structure_by_external_id, [id, opts])
+  def get_data_structure_by_external_id(external_id, opts \\ []) do
+    call_dd(TdDd.DataStructures, :get_data_structure_by_external_id, [external_id, opts])
   end
 
   # bulk relation implementation_ref
   def get_implementations_by_ref(implementation_ref, opts \\ []) do
-    call_dd(TdDd.DataStructures, :get_versions, [implementation_ref, opts])
+    call_dd(TdDd.Implementations, :get_versions, [implementation_ref, opts])
   end
 
   def call_dd(module, function, args), do: ClusterHandler.call(:dd, module, function, args)
