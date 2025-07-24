@@ -18,29 +18,29 @@ defmodule TdCluster.Cluster.TdBg do
     call_bg(TdBg.BusinessConcepts, :generate_vector, [params, collection_name])
   end
 
-  def get_business_concept_by_translatable_name(name) do
-    call_bg(TdBg.BusinessConcepts, :get_business_concept_by_translatable_name, [name])
+  def get_versions_by_translatable_name(name) do
+    call_bg(TdBg.BusinessConcepts, :get_versions_by_translatable_name, [name])
   end
 
-  def bulk_load_event(
-        bulk_data,
-        filename,
-        file_hash,
-        task_ref,
-        user_id,
-        event_status
-      ) do
-    event =
-      %{
-        response: bulk_data,
-        filename: filename,
-        file_hash: file_hash,
-        task_reference: ref_to_string(task_ref),
-        user_id: user_id,
-        status: event_status
-      }
+  def bulk_load_event(opts) do
+    %{user_id: user_id} = Keyword.get(opts, :claims, %{})
 
-    create_bulk_upload_event(event)
+    %{
+      filename: Keyword.get(opts, :filename),
+      file_hash: Keyword.get(opts, :hash),
+      task_reference: ref_to_string(Keyword.get(opts, :task_ref)),
+      user_id: user_id,
+      status: Keyword.get(opts, :status)
+    }
+    |> maybe_add_response(opts)
+    |> create_bulk_upload_event()
+  end
+
+  defp maybe_add_response(params, response) do
+    case Keyword.get(response, :response) do
+      response when not is_nil(response) -> Map.put(params, :response, response)
+      _ -> params
+    end
   end
 
   defp create_bulk_upload_event(event) do
