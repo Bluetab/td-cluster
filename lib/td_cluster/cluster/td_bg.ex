@@ -18,8 +18,8 @@ defmodule TdCluster.Cluster.TdBg do
     call_bg(TdBg.BusinessConcepts, :generate_vector, [params, collection_name])
   end
 
-  def get_versions_by_translatable_name(name) do
-    call_bg(TdBg.BusinessConcepts, :get_versions_by_translatable_name, [name])
+  def get_concept_by_name_in_domain(name, domain_id) do
+    call_bg(TdBg.BusinessConcepts, :get_concept_by_name_in_domain, [name, domain_id])
   end
 
   def bulk_load_event(opts) do

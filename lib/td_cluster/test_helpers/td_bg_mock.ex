@@ -21,4 +21,22 @@ defmodule TdCluster.TestHelpers.TdBgMock do
       expected
     end)
   end
+
+  def get_concept_by_name_in_domain(expect, name, expected, times \\ 1) do
+    expect.(MockClusterHandler, :call, times, fn :bg,
+                                                 TdBg.BusinessConcepts,
+                                                 :get_concept_by_name_in_domain,
+                                                 [^name] ->
+      expected
+    end)
+  end
+
+  def bulk_upload_event(expect, event, expected, times \\ 1) do
+    expect.(MockClusterHandler, :call, times, fn :bg,
+                                                 TdBg.BusinessConcepts.BulkUploadEvents,
+                                                 :create_bulk_upload_event,
+                                                 [^event] ->
+      expected
+    end)
+  end
 end

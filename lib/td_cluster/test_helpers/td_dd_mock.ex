@@ -20,6 +20,18 @@ defmodule TdCluster.TestHelpers.TdDdMock do
     end)
   end
 
+  def get_data_structure_by_external_id(expect, external_id, data_list, search_fn, times \\ 1) do
+    expect.(MockClusterHandler, :call, times, fn :dd,
+                                                 TdDd.DataStructures,
+                                                 :get_data_structure_by_external_id,
+                                                 [arg, _]
+                                                 when arg == external_id ->
+      result = search_fn.(external_id, data_list)
+
+      {:ok, result}
+    end)
+  end
+
   def log_start_stream(expect, count, expected, times \\ 1) do
     expect.(MockClusterHandler, :call, times, fn :dd,
                                                  TdDd.Search.Tasks,
