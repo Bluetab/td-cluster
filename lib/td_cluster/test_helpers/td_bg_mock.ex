@@ -22,11 +22,11 @@ defmodule TdCluster.TestHelpers.TdBgMock do
     end)
   end
 
-  def get_concept_by_name_in_domain(expect, name, expected, times \\ 1) do
+  def get_concept_by_name_in_domain(expect, name, domain_id, expected, times \\ 1) do
     expect.(MockClusterHandler, :call, times, fn :bg,
                                                  TdBg.BusinessConcepts,
                                                  :get_concept_by_name_in_domain,
-                                                 [^name] ->
+                                                 [^name, ^domain_id] ->
       expected
     end)
   end
