@@ -26,7 +26,9 @@ defmodule TdCluster.TestHelpers.TdBgMock do
     expect.(MockClusterHandler, :call, times, fn :bg,
                                                  TdBg.BusinessConcepts,
                                                  :get_concept_by_name_in_domain,
-                                                 [^name, ^domain_id] ->
+                                                 [arg_name, arg_domain_id]
+                                                 when arg_name == name and
+                                                        arg_domain_id == domain_id ->
       expected
     end)
   end
@@ -35,7 +37,7 @@ defmodule TdCluster.TestHelpers.TdBgMock do
     expect.(MockClusterHandler, :call, times, fn :bg,
                                                  TdBg.BusinessConcepts.BulkUploadEvents,
                                                  :create_bulk_upload_event,
-                                                 [^event] ->
+                                                 [event] ->
       expected
     end)
   end
