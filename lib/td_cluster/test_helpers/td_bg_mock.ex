@@ -37,7 +37,8 @@ defmodule TdCluster.TestHelpers.TdBgMock do
     expect.(MockClusterHandler, :call, times, fn :bg,
                                                  TdBg.BusinessConcepts.BulkUploadEvents,
                                                  :create_bulk_upload_event,
-                                                 [event] ->
+                                                 [arg_event]
+                                                 when arg_event == event ->
       expected
     end)
   end
