@@ -14,4 +14,10 @@ defmodule TdCluster.TestHelpers.TdAiMock.Indices do
       expected
     end)
   end
+
+  def first_enabled(expect, expected, times \\ 1) do
+    expect.(MockClusterHandler, :call, times, fn :ai, TdAi.Indices, :first_enabled, [] ->
+      expected
+    end)
+  end
 end

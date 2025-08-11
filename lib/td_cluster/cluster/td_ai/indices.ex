@@ -12,4 +12,8 @@ defmodule TdCluster.Cluster.TdAi.Indices do
   def exists_enabled? do
     Cluster.TdAi.call_ai(TdAi.Indices, :exists_enabled?, [])
   end
+
+  def first_enabled do
+    Cluster.TdAi.call_ai(TdAi.Indices, :first_enabled, [])
+  end
 end
