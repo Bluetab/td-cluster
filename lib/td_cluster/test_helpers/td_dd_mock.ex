@@ -36,4 +36,13 @@ defmodule TdCluster.TestHelpers.TdDdMock do
       expected
     end)
   end
+
+  def generate_vector(expect, params, collection_name, expected, times \\ 1) do
+    expect.(MockClusterHandler, :call, times, fn :dd,
+                                                 TdDd.DataStructures,
+                                                 :generate_vector,
+                                                 [^params, ^collection_name] ->
+      expected
+    end)
+  end
 end

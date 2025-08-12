@@ -13,5 +13,9 @@ defmodule TdCluster.Cluster.TdDd do
     call_dd(TdDd.DataStructures, :get_latest_version, [id, opts])
   end
 
+  def generate_vector(id, collection_name \\ nil) do
+    call_dd(TdDd.DataStructures, :generate_vector, [id, collection_name])
+  end
+
   def call_dd(module, function, args), do: ClusterHandler.call(:dd, module, function, args)
 end
