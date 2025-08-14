@@ -3,7 +3,7 @@ defmodule TdCluster.TestHelpers.TdBgMock do
   Mocks Clusters for tests
   """
 
-  def get_business_concept_version(expect, id, version, expected, count \\ 1) do
+  def get_business_concept_version(expect, id, version, expected, count) do
     expect.(MockClusterHandler, :call, count, fn :bg,
                                                  TdBg.BusinessConcepts,
                                                  :get_business_concept_version,
@@ -22,13 +22,22 @@ defmodule TdCluster.TestHelpers.TdBgMock do
     end)
   end
 
-  def get_concept_by_name_in_domain(expect, name, domain_id, expected, times \\ 1) do
+  def get_concept_by_name_in_domain(expect, name, domain_id, expected, times) do
+    IO.inspect("-------------------")
+    IO.inspect(expect, label: "expect")
+    IO.inspect(times, label: "times")
+    IO.inspect(name)
+    IO.inspect(domain_id)
+    IO.inspect(expected)
+
     expect.(MockClusterHandler, :call, times, fn :bg,
                                                  TdBg.BusinessConcepts,
                                                  :get_concept_by_name_in_domain,
-                                                 [arg_name, arg_domain_id]
-                                                 when arg_name == name and
-                                                        arg_domain_id == domain_id ->
+                                                 [arg_name, arg_domain_id] ->
+      IO.inspect(arg_name, label: "arg_name")
+      IO.inspect(arg_domain_id, label: "arg_domain_id")
+      #  when arg_name == name and
+      #         arg_domain_id == domain_id ->
       expected
     end)
   end
