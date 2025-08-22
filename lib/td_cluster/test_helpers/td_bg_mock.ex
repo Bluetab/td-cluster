@@ -22,24 +22,17 @@ defmodule TdCluster.TestHelpers.TdBgMock do
     end)
   end
 
-  def get_concept_by_name_in_domain(expect, name, domain_id, expected, times) do
-    IO.inspect("-------------------")
-    IO.inspect(expect, label: "expect")
-    IO.inspect(times, label: "times")
-    IO.inspect(name)
-    IO.inspect(domain_id)
-    IO.inspect(expected)
-
-    expect.(MockClusterHandler, :call, times, fn :bg,
-                                                 TdBg.BusinessConcepts,
-                                                 :get_concept_by_name_in_domain,
-                                                 [arg_name, arg_domain_id] ->
-      IO.inspect(arg_name, label: "arg_name")
-      IO.inspect(arg_domain_id, label: "arg_domain_id")
-      #  when arg_name == name and
-      #         arg_domain_id == domain_id ->
-      expected
-    end)
+  def get_concept_by_name_in_domain(expect, name, domain_id, expected, times \\ 1) do
+    expect.(
+      MockClusterHandler,
+      :call,
+      times,
+      fn :bg, TdBg.BusinessConcepts, :get_concept_by_name_in_domain, [arg_name, arg_domain_id]
+         when arg_name == name and
+                arg_domain_id == domain_id ->
+        expected
+      end
+    )
   end
 
   def bulk_upload_event(expect, event, expected, times \\ 1) do

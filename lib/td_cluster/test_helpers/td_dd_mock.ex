@@ -20,27 +20,19 @@ defmodule TdCluster.TestHelpers.TdDdMock do
     end)
   end
 
-  def get_data_structure_by_external_id(expect, external_id, preload, expected, times) do
-    IO.inspect("-------------------")
-    IO.inspect(expect, label: "expect")
-    IO.inspect(times, label: "times")
-    IO.inspect(external_id)
-    IO.inspect(preload)
-    IO.inspect(expected)
-
+  def get_data_structure_by_external_id(expect, external_id, preload, expected, times \\ 1) do
     expect.(MockClusterHandler, :call, times, fn :dd,
                                                  TdDd.DataStructures,
                                                  :get_data_structure_by_external_id,
-                                                 [arg_external_id, arg_preload] ->
-      #  when arg_external_id == external_id and
-      #         arg_preload == preload ->
-      IO.inspect(arg_external_id)
-      IO.inspect(arg_preload)
+                                                 [arg_external_id, arg_preload]
+                                                 when arg_external_id == external_id and
+                                                        arg_preload == preload ->
       expected
     end)
   end
 
-  def log_start_stream(expect, args, count, expected, times \\ 1) do
+  ## REVIEW TD-7175: Revisar la variable de count, que no se esta enviando al tasks
+  def log_start_stream(expect, args, _count, expected, times \\ 1) do
     expect.(MockClusterHandler, :call, times, fn :dd,
                                                  TdDd.Search.Tasks,
                                                  :log_start_stream,
