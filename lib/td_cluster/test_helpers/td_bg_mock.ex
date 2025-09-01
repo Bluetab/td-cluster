@@ -35,12 +35,12 @@ defmodule TdCluster.TestHelpers.TdBgMock do
     )
   end
 
-  def bulk_upload_event(expect, event, expected, times \\ 1) do
+  def create_bulk_upload_event(expect, event, expected, times \\ 1) do
     expect.(MockClusterHandler, :call, times, fn :bg,
                                                  TdBg.BusinessConcepts.BulkUploadEvents,
                                                  :create_bulk_upload_event,
                                                  [arg_event]
-                                                 when arg_event == event ->
+                                                 when event.status == arg_event.status ->
       expected
     end)
   end
