@@ -3,7 +3,7 @@ defmodule TdCluster.TestHelpers.TdBgMock do
   Mocks Clusters for tests
   """
 
-  def get_business_concept_version(expect, id, version, expected, count) do
+  def get_business_concept_version(expect, id, version, expected, count \\ 1) do
     expect.(MockClusterHandler, :call, count, fn :bg,
                                                  TdBg.BusinessConcepts,
                                                  :get_business_concept_version,
