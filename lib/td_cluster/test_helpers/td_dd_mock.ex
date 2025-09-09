@@ -31,7 +31,6 @@ defmodule TdCluster.TestHelpers.TdDdMock do
     end)
   end
 
-  ## REVIEW TD-7175: Revisar la variable de count, que no se esta enviando al tasks
   def log_start_stream(expect, args, _count, expected, times \\ 1) do
     expect.(MockClusterHandler, :call, times, fn :dd,
                                                  TdDd.Search.Tasks,
