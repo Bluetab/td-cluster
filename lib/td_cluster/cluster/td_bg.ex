@@ -9,7 +9,6 @@ defmodule TdCluster.Cluster.TdBg do
     call_bg(TdBg.BusinessConcepts, :list_business_concept_versions, [criteria])
   end
 
-  # bulk relation business_concept
   def get_business_concept_version(id, version) do
     call_bg(TdBg.BusinessConcepts, :get_business_concept_version, [id, version])
   end
