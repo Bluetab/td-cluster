@@ -1,5 +1,13 @@
 # Changelog
 
+## [Unreleased]
+
+### Added
+
+- [TD-7345];
+ - Generate vector for collection.
+ - Fetch first enabled index.  
+  
 ## [7.5.0] 2025-05-22
 
 ### Added
