@@ -31,7 +31,7 @@ defmodule TdCluster.TestHelpers.TdDdMock do
     end)
   end
 
-  def log_start_stream(expect, args, _count, expected, times \\ 1) do
+  def log_start_stream(expect, args, expected, times \\ 1) do
     expect.(MockClusterHandler, :call, times, fn :dd,
                                                  TdDd.Search.Tasks,
                                                  :log_start_stream,
