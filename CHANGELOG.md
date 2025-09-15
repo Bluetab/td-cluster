@@ -8,6 +8,12 @@
  - Generate vector for collection.
  - Fetch first enabled index.  
   
+## [7.10.0] 2025-09-09
+
+### Added
+
+- [TD-7175] Added functions to cluster of bg, dd and ie for bulk load of relations
+
 ## [7.5.0] 2025-05-22
 
 ### Added

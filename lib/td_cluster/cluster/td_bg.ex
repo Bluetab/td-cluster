@@ -17,5 +17,13 @@ defmodule TdCluster.Cluster.TdBg do
     call_bg(TdBg.BusinessConcepts, :generate_vector, [params, collection_name])
   end
 
+  def get_concept_by_name_in_domain(name, domain_id) do
+    call_bg(TdBg.BusinessConcepts, :get_concept_by_name_in_domain, [name, domain_id])
+  end
+
+  def create_bulk_upload_event(event) do
+    call_bg(TdBg.BusinessConcepts.BulkUploadEvents, :create_bulk_upload_event, [event])
+  end
+
   defp call_bg(module, function, args), do: ClusterHandler.call(:bg, module, function, args)
 end
