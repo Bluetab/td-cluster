@@ -4,7 +4,7 @@ defmodule TdCluster.MixProject do
   def project do
     [
       app: :td_cluster,
-      version: "7.10.0",
+      version: "7.10.1",
       elixir: "~> 1.18",
       start_permanent: Mix.env() == :prod,
       deps: deps()
