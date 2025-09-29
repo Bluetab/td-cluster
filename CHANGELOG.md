@@ -1,5 +1,12 @@
 # Changelog
 
+## [7.10.2] 2025-09-18
+
+### Fixed
+
+- [TD-7417] DD mock function.
+ 
+
 ## [7.10.1] 2025-09-16
 
 ### Added
