@@ -1,5 +1,11 @@
 # Changelog
 
+## [Unreleased]
+
+### Changed
+
+- [TD-7302] td-ai functions to add index_type argument
+
 ## [7.10.2] 2025-09-18
 
 ### Fixed
