@@ -14,5 +14,9 @@ defmodule TdCluster.Cluster.TdLm do
     ])
   end
 
+  def refresh_search_data(index, ids) do
+    call_lm(TdLm.Resources, :refresh_search_data, [index, ids])
+  end
+
   defp call_lm(module, function, args), do: ClusterHandler.call(:lm, module, function, args)
 end
