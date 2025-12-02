@@ -1,20 +1,23 @@
 # Changelog
 
+## [Unreleased]
+
+- [TD-7678] Update TdBg functions for search concepts by name, domain and template
+
 ## [7.10.2] 2025-09-18
 
 ### Fixed
 
 - [TD-7417] DD mock function.
- 
 
 ## [7.10.1] 2025-09-16
 
 ### Added
 
 - [TD-7345];
- - Generate vector for collection.
- - Fetch first enabled index.  
-  
+- Generate vector for collection.
+- Fetch first enabled index.
+
 ## [7.10.0] 2025-09-09
 
 ### Added
