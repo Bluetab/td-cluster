@@ -13,8 +13,8 @@ defmodule TdCluster.Cluster.TdBg do
     call_bg(TdBg.BusinessConcepts, :get_business_concept_version, [id, version])
   end
 
-  def generate_vector(params, collection_name \\ nil) do
-    call_bg(TdBg.BusinessConcepts, :generate_vector, [params, collection_name])
+  def generate_vector(params, index_type, collection_name \\ nil) do
+    call_bg(TdBg.BusinessConcepts, :generate_vector, [params, index_type, collection_name])
   end
 
   def get_concept_by_name_in_domain(name, domain_id) do
