@@ -13,8 +13,8 @@ defmodule TdCluster.Cluster.TdDd do
     call_dd(TdDd.DataStructures, :get_latest_version, [id, opts])
   end
 
-  def generate_vector(id, collection_name \\ nil) do
-    call_dd(TdDd.DataStructures, :generate_vector, [id, collection_name])
+  def generate_vector(id, index_type, collection_name \\ nil) do
+    call_dd(TdDd.DataStructures, :generate_vector, [id, index_type, collection_name])
   end
 
   def get_data_structure_by_external_id(external_id, opts \\ []) do
