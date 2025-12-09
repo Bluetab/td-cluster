@@ -17,8 +17,8 @@ defmodule TdCluster.Cluster.TdBg do
     call_bg(TdBg.BusinessConcepts, :generate_vector, [params, index_type, collection_name])
   end
 
-  def get_concept_by_name_in_domain(name, domain_id) do
-    call_bg(TdBg.BusinessConcepts, :get_concept_by_name_in_domain, [name, domain_id])
+  def get_unique_concept(name, domain_id, concept_type) do
+    call_bg(TdBg.BusinessConcepts, :get_unique_concept, [name, domain_id, concept_type])
   end
 
   def create_bulk_upload_event(event) do
