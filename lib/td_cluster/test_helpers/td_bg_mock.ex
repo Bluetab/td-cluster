@@ -27,28 +27,14 @@ defmodule TdCluster.TestHelpers.TdBgMock do
       MockClusterHandler,
       :call,
       times,
-      fn :bg, TdBg.BusinessConcepts, :get_unique_concept, [arg_name, arg_domain_id, arg_concept_type]
+      fn :bg,
+         TdBg.BusinessConcepts,
+         :get_unique_concept,
+         [arg_name, arg_domain_id, arg_concept_type]
          when arg_name == name and
-         arg_domain_id == domain_id and
-         arg_concept_type == concept_type ->
+                arg_domain_id == domain_id and
+                arg_concept_type == concept_type ->
         expected
-      end
-    )
-  end
-
-  def get_unique_concept_stub(stub_fn, name, domain_id, concept_type_fn) do
-    stub_fn.(
-      MockClusterHandler,
-      :call,
-      fn service, module, function, args ->
-        case {service, module, function, args} do
-          {:bg, TdBg.BusinessConcepts, :get_unique_concept, [arg_name, arg_domain_id, arg_concept_type]}
-          when arg_name == name and arg_domain_id == domain_id ->
-            concept_type_fn.(arg_concept_type)
-
-          _ ->
-            raise "Unexpected call: #{inspect({service, module, function, args})}"
-        end
       end
     )
   end
