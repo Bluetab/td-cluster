@@ -18,5 +18,9 @@ defmodule TdCluster.Cluster.TdLm do
     call_lm(TdLm.Resources, :refresh_search_data, [index, ids])
   end
 
+  def delete_stale_relations(resource_type, resource_ids) do
+    call_lm(TdLm.Resources, :delete_stale_relations, [resource_type, resource_ids])
+  end
+
   defp call_lm(module, function, args), do: ClusterHandler.call(:lm, module, function, args)
 end
