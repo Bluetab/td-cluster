@@ -3,8 +3,8 @@ defmodule TdCluster.TdDd.Search do
   Module to interact with the search of the dd cluster
   """
 
-  alias TdDd.DataStructures.Search
   alias TdCluster.ClusterHandler
+  alias TdDd.DataStructures.Search
 
   def build_filters(permissions, opts \\ []) do
     call_dd(Search.Query, :build_filters, [permissions, opts])
