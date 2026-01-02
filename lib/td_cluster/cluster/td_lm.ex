@@ -22,5 +22,9 @@ defmodule TdCluster.Cluster.TdLm do
     call_lm(TdLm.Resources, :delete_stale_relations, [resource_type, resource_ids])
   end
 
+  def count_relations(params \\ []) do
+    call_lm(TdLm.Resources, :count_relations, [params])
+  end
+
   defp call_lm(module, function, args), do: ClusterHandler.call(:lm, module, function, args)
 end
