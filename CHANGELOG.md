@@ -2,6 +2,14 @@
 
 ## [Unreleased]
 
+### Added
+
+- [TD-7861]:
+  - DD: Fetch store information
+  - LM: Upsert relations
+
+## [Unreleased]
+
 - [TD-7696]:
   - BG:
     - Access to permissions model
