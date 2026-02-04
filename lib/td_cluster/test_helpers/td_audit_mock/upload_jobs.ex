@@ -70,19 +70,22 @@ defmodule TdCluster.TestHelpers.TdAuditMock.UploadJobs do
 
   defp assert_maps_includes(expected, actual) when is_map(expected) and is_map(actual) do
     Enum.each(expected, fn {key, val} ->
-      case Map.fetch(actual, key) do
-        {:ok, actual_val} ->
-          if is_map(val) and is_map(actual_val) do
-            assert_maps_includes(val, actual_val)
-          else
-            if actual_val != val do
-              raise "Expected key #{inspect(key)} with value #{inspect(val)}, got #{inspect(actual_val)}"
-            end
-          end
-
-        :error ->
-          raise "Expected key #{inspect(key)} not found in map #{inspect(actual)}"
-      end
+      assert_key_includes(key, val, actual)
     end)
+  end
+
+  defp assert_key_includes(key, val, actual) do
+    case Map.fetch(actual, key) do
+      {:ok, actual_val} when is_map(val) and is_map(actual_val) ->
+        assert_maps_includes(val, actual_val)
+
+      {:ok, actual_val} ->
+        unless actual_val == val do
+          raise "Expected key #{inspect(key)} with value #{inspect(val)}, got #{inspect(actual_val)}"
+        end
+
+      :error ->
+        raise "Expected key #{inspect(key)} not found in map #{inspect(actual)}"
+    end
   end
 end
