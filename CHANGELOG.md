@@ -8,21 +8,13 @@
   - DD: Fetch store information
   - LM: Upsert relations
 
-## [Unreleased]
 
-- [TD-7696]:
-  - BG:
-    - Access to permissions model
-    - Interact with service search query
-    - Fetch store information
-  - DD:
-    - Interact with service search query
-  - LM:
-   - Refresh link search data
-   - Allow to delete stale relations
-   - Count relations given a set of params
-  - QX:
-    - Fetch store information
+## [8.1.0] 2026-02-09
+
+### Added
+
+- [TD-7286] Added audit UploadJobs functions
+
 
 ## [7.14.1] 2025-12-09
 
