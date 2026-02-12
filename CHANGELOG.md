@@ -8,13 +8,11 @@
   - DD: Fetch store information
   - LM: Upsert relations
 
-
 ## [8.1.0] 2026-02-09
 
 ### Added
 
 - [TD-7286] Added audit UploadJobs functions
-
 
 ## [7.14.1] 2025-12-09
 
