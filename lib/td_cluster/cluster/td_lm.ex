@@ -14,5 +14,21 @@ defmodule TdCluster.Cluster.TdLm do
     ])
   end
 
+  def refresh_search_data(index, ids) do
+    call_lm(TdLm.Resources, :refresh_search_data, [index, ids])
+  end
+
+  def delete_stale_relations(resource_type, resource_ids) do
+    call_lm(TdLm.Resources, :delete_stale_relations, [resource_type, resource_ids])
+  end
+
+  def count_relations(params \\ []) do
+    call_lm(TdLm.Resources, :count_relations, [params])
+  end
+
+  def upsert_relations(relations, opts \\ []) do
+    call_lm(TdLm.Resources, :upsert_relations, [relations, opts])
+  end
+
   defp call_lm(module, function, args), do: ClusterHandler.call(:lm, module, function, args)
 end
