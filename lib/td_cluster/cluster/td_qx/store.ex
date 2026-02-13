@@ -3,12 +3,10 @@ defmodule TdCluster.TdQx.Store do
   Module to interact with the store of the qx cluster
   """
 
-  alias TdCluster.ClusterHandler
+  alias TdCluster.Cluster.TdQx, as: QxCluster
 
   def fetch(params, index \\ :quality_control_versions) do
-    {:ok, %{schema: schema, store: store}} = call_qx(TdQx.Search, :store, [index])
-    call_qx(store, :fetch, [schema, params])
+    {:ok, %{schema: schema, store: store}} = QxCluster.call_qx(TdQx.Search, :store, [index])
+    QxCluster.call_qx(store, :fetch, [schema, params])
   end
-
-  defp call_qx(module, function, args), do: ClusterHandler.call(:qx, module, function, args)
 end

@@ -26,5 +26,9 @@ defmodule TdCluster.Cluster.TdLm do
     call_lm(TdLm.Resources, :count_relations, [params])
   end
 
+  def upsert_relations(relations, opts \\ []) do
+    call_lm(TdLm.Resources, :upsert_relations, [relations, opts])
+  end
+
   defp call_lm(module, function, args), do: ClusterHandler.call(:lm, module, function, args)
 end

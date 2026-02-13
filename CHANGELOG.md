@@ -2,6 +2,8 @@
 
 ## [Unreleased]
 
+### Added
+
 - [TD-7696]:
   - BG:
     - Access to permissions model
@@ -15,6 +17,16 @@
    - Count relations given a set of params
   - QX:
     - Fetch store information
+
+
+## [8.2.0] 2026-02-12
+
+### Added
+
+- [TD-7861]:
+  - DD: Fetch store information
+  - LM: Upsert relations
+
 
 ## [8.1.0] 2026-02-09
 
