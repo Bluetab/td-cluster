@@ -2,31 +2,27 @@
 
 ## [Unreleased]
 
+## [8.2.1] 2026-02-12
+## [8.2.0] 2026-02-12
+
 ### Added
 
-- [TD-7696]:
+- [TD-7861]
+- [TD-7696]
   - BG:
     - Access to permissions model
     - Interact with service search query
     - Fetch store information
   - DD:
     - Interact with service search query
+    - Fetch store information
   - LM:
    - Refresh link search data
    - Allow to delete stale relations
    - Count relations given a set of params
+   - Upsert relations
   - QX:
     - Fetch store information
-
-
-## [8.2.0] 2026-02-12
-
-### Added
-
-- [TD-7861]:
-  - DD: Fetch store information
-  - LM: Upsert relations
-
 
 ## [8.1.0] 2026-02-09
 
