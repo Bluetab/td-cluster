@@ -25,5 +25,10 @@ defmodule TdCluster.Cluster.TdBg do
     call_bg(TdBg.BusinessConcepts.BulkUploadEvents, :create_bulk_upload_event, [event])
   end
 
+  def agent_layer_call(module, function, args) when is_atom(module) do
+    full_module = Module.concat(TdBg.Ai, module)
+    call_bg(full_module, function, args)
+  end
+
   defp call_bg(module, function, args), do: ClusterHandler.call(:bg, module, function, args)
 end
