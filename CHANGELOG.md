@@ -2,6 +2,10 @@
 
 ## [Unreleased]
 
+### Added
+
+- [TD-6489] Added agent layer caller for dd and bg
+
 ## [8.2.1] 2026-02-12
 ## [8.2.0] 2026-02-12
 
