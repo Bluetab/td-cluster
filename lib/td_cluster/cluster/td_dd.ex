@@ -25,5 +25,10 @@ defmodule TdCluster.Cluster.TdDd do
     call_dd(TdDd.Implementations, :get_versions, [implementation_ref, opts])
   end
 
+  def agent_layer_call(module, function, args) when is_atom(module) do
+    full_module = Module.concat(TdDd.Ai, module)
+    call_dd(full_module, function, args)
+  end
+
   def call_dd(module, function, args), do: ClusterHandler.call(:dd, module, function, args)
 end

@@ -1,8 +1,13 @@
 # Changelog
 
-## [Unreleased]
+## [8.3.0] 2026-03-23
+
+### Added
+
+- [TD-6489] Added agent layer caller for dd and bg
 
 ## [8.2.1] 2026-02-12
+
 ## [8.2.0] 2026-02-12
 
 ### Added
@@ -17,10 +22,10 @@
     - Interact with service search query
     - Fetch store information
   - LM:
-   - Refresh link search data
-   - Allow to delete stale relations
-   - Count relations given a set of params
-   - Upsert relations
+  - Refresh link search data
+  - Allow to delete stale relations
+  - Count relations given a set of params
+  - Upsert relations
   - QX:
     - Fetch store information
 
