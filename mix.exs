@@ -23,6 +23,7 @@ defmodule TdCluster.MixProject do
   defp deps do
     [
       {:credo, "~> 1.7.11", only: [:dev, :test], runtime: false},
+      {:git_hooks, "~> 0.7", only: :dev, runtime: false},
       {:libcluster, "~> 3.4.1"}
     ]
   end
