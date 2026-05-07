@@ -5,7 +5,7 @@ defmodule TdCluster.Cluster.TdAudit.UploadJobs do
   alias TdCluster.Cluster
 
   def create_job(attrs) do
-   Cluster.TdAudit.call_audit!(TdAudit.UploadJobs, :create_job, [attrs])
+    Cluster.TdAudit.call_audit!(TdAudit.UploadJobs, :create_job, [attrs])
   end
 
   def create_pending(job_id) do
