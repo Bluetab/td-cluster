@@ -5,5 +5,6 @@ defmodule TdCluster.Cluster.TdAudit do
 
   alias TdCluster.ClusterHandler
 
-  def call_audit!(module, function, args), do: ClusterHandler.call!(:audit, module, function, args)
+  def call_audit!(module, function, args),
+    do: ClusterHandler.call!(:audit, module, function, args)
 end
