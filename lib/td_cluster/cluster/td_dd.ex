@@ -27,7 +27,7 @@ defmodule TdCluster.Cluster.TdDd do
 
   def get_implementation_version_ids_by_ref(implementation_ref)
       when is_integer(implementation_ref) do
-    call_dd(TdDq.Implementations, :get_version_ids, [%{implementation_ref: implementation_ref}])
+    call_dd(TdDd.Implementations, :get_version_ids, [%{implementation_ref: implementation_ref}])
   end
 
   def get_implementation_version_ids_by_ref(implementation_ref)
