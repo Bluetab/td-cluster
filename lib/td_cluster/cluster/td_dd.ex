@@ -25,8 +25,8 @@ defmodule TdCluster.Cluster.TdDd do
     call_dd(TdDd.Implementations, :get_versions, [implementation_ref, opts])
   end
 
-  def get_implementation_version_ids_by_ref(implementation_ref) do
-    call_dd(TdDd.Implementations, :get_version_ids, [implementation_ref])
+  def get_implementation_version_ids_by_ref(implementation_ref, opts \\ []) do
+    call_dd(TdDd.Implementations, :get_version_ids, [implementation_ref, opts])
   end
 
   def agent_layer_call(module, function, args) when is_atom(module) do
