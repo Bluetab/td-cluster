@@ -31,6 +31,15 @@ defmodule TdCluster.TestHelpers.TdDdMock do
     end)
   end
 
+  def get_implementations_by_ref(expect, ref, expected, times \\ 1) do
+    expect.(MockClusterHandler, :call, times, fn :dd,
+                                                 TdDq.Implementations,
+                                                 :get_versions,
+                                                 [%{implementation_ref: ^ref}] ->
+      expected
+    end)
+  end
+
   def log_start_stream(expect, count, expected, times \\ 1) do
     expect.(MockClusterHandler, :call, times, fn :dd,
                                                  TdDd.Search.Tasks,
