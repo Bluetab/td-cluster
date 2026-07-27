@@ -30,7 +30,7 @@ defmodule TdCluster.Cluster.TdDd do
     case call_dd(
            TdDq.Implementations,
            :get_implementation_versions_ids_by_ref,
-           implementation_ref
+           [implementation_ref]
          ) do
       {:ok, ids} when is_list(ids) -> ids
       _ -> []
