@@ -1,5 +1,13 @@
 # Changelog
 
+## [Unreleased]
+
+### Changed
+
+- [TD-7599]
+  - Improve audit messages for implementation and rule events
+  - Update bulk upload to use implementation_ref as resource_type to support future concept-implementation relations
+
 ## [8.7.0] 2026-06-10
 
 ### Added
