@@ -1,5 +1,11 @@
 # Changelog
 
+## [Unreleased]
+
+### Removed
+
+- [TD-8284] Remove legacy resource_field_completion and available_resource_mapping cluster proxies to td-ai
+
 ## [8.7.0] 2026-06-10
 
 ### Added
