@@ -10,6 +10,12 @@
 
 - [TD-7599] Update bulk upload to use implementation_ref as resource_type to support future concept-implementation relations
 
+## [8.10.0] 2026-08-07
+
+### Removed
+
+- [TD-8284] Remove legacy resource_field_completion and available_resource_mapping cluster proxies to td-ai
+
 ## [8.7.0] 2026-06-10
 
 ### Added
