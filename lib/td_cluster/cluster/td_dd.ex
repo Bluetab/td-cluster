@@ -21,28 +21,8 @@ defmodule TdCluster.Cluster.TdDd do
     call_dd(TdDd.DataStructures, :get_data_structure_by_external_id, [external_id, opts])
   end
 
-  def get_implementations_by_ref(implementation_ref) do
-    call_dd(TdDq.Implementations, :get_versions, [%{implementation_ref: implementation_ref}])
-  end
-
-  def get_implementation_version_ids_by_ref(implementation_ref)
-      when is_integer(implementation_ref) do
-    case call_dd(
-           TdDq.Implementations,
-           :get_implementation_versions_ids_by_ref,
-           [implementation_ref]
-         ) do
-      {:ok, ids} when is_list(ids) -> ids
-      _ -> []
-    end
-  end
-
-  def get_implementation_version_ids_by_ref(implementation_ref)
-      when is_binary(implementation_ref) do
-    case Integer.parse(implementation_ref) do
-      {int, ""} -> get_implementation_version_ids_by_ref(int)
-      _ -> []
-    end
+  def get_implementations_by_ref(implementation_ref, opts \\ []) do
+    call_dd(TdDd.Implementations, :get_versions, [implementation_ref, opts])
   end
 
   def agent_layer_call(module, function, args) when is_atom(module) do
