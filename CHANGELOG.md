@@ -1,5 +1,9 @@
 # Changelog
 
+## [8.14.0] 2026-11-04
+
+- [TD-8573] hex audit workflow
+
 ## [8.11.0] 2026-08-28
 
 ### Changed
