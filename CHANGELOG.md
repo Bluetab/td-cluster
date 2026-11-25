@@ -1,5 +1,11 @@
 # Changelog
 
+## [8.15.1] 2026-11-25
+
+### Changed
+
+- [TD-8673] Update `libcluster` to 3.6.0. Since libcluster 3.5.1 the Kubernetes strategy always verifies the API server against the service-account `ca.crt`, and discovery stops if that file is missing
+
 ## [8.15.0] 2026-11-25
 
 ### Changed
