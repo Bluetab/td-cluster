@@ -23,7 +23,7 @@ defmodule TdCluster.MixProject do
   defp deps do
     [
       {:credo, "~> 1.7.11", only: [:dev, :test], runtime: false},
-      {:libcluster, "~> 3.4.1"}
+      {:libcluster, "~> 3.6.0"}
     ]
   end
 end
